@@ -30,14 +30,14 @@ void initCudartBindings(PyObject* module) {
   // By splitting the names of these objects into two literals we prevent the
   // HIP rewrite rules from changing these names when building with HIP.
 
-#if !defined(USE_ROCM)
-  py::enum_<cudaOutputMode_t>(
-      cudart,
-      "cuda"
-      "OutputMode")
-      .value("KeyValuePair", cudaKeyValuePair)
-      .value("CSV", cudaCSV);
-#endif
+// #if !defined(USE_ROCM)
+//   py::enum_<cudaOutputMode_t>(
+//       cudart,
+//       "cuda"
+//       "OutputMode")
+//       .value("KeyValuePair", cudaKeyValuePair)
+//       .value("CSV", cudaCSV);
+// #endif
 
   py::enum_<cudaError_t>(
       cudart,
@@ -92,12 +92,12 @@ void initCudartBindings(PyObject* module) {
       [](uintptr_t ptr) -> cudaError_t {
         return C10_CUDA_ERROR_HANDLED(cudaStreamDestroy((cudaStream_t)ptr));
       });
-#if !defined(USE_ROCM)
-  cudart.def(
-      "cuda"
-      "ProfilerInitialize",
-      cudaProfilerInitialize);
-#endif
+// #if !defined(USE_ROCM)
+//   cudart.def(
+//       "cuda"
+//       "ProfilerInitialize",
+//       cudaProfilerInitialize);
+// #endif
   cudart.def(
       "cuda"
       "MemGetInfo",
